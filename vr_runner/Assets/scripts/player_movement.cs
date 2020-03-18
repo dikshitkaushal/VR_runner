@@ -10,6 +10,7 @@ public class player_movement : MonoBehaviour
     public float max_speed = 7f;
     public float jumpingforce = 350f;
     public bool isjumping=false;
+    public bool reachedfinishedline = false;
     private float timer = 0f;
     player_oscillation oscillate;
 
@@ -45,10 +46,17 @@ public class player_movement : MonoBehaviour
         this.GetComponent<Rigidbody>().AddForce(Vector3.up * jumpingforce);
         isjumping = true;
         oscillate.enabled = false;
-        timer = 1.5f;
+        timer = 1.35f;
     }
     public void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
+        if(other.CompareTag("obstacle"))
+        {
+            speed *= 0.3f;
+        }
+        if(other.CompareTag("finishingline"))
+        {
+            reachedfinishedline = true;
+        }
     }
 }
