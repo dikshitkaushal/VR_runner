@@ -827,11 +827,11 @@ MonoBehaviour:
   speed: 0
   acceleration: 1
   max_speed: 7
-  jumpingforce: 30
+  jumpingforce: 350
   isjumping: 0
   reachedfinishedline: 0
   fpcam: {fileID: 963194227}
-  jumping_angle: 351
+  jumping_angle: 28
 --- !u!54 &745686849
 Rigidbody:
   m_ObjectHideFlags: 0
