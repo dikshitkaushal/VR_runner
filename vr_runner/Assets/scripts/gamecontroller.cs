@@ -8,7 +8,7 @@ public class gamecontroller : MonoBehaviour
     public player_movement player;
     public TextMesh infotext;
     private float gametimer = 0f;
-    private float restarttimer = 4f;
+    private float restarttimer = 3f;
     // Start is called before the first frame update
     void Start()
     {

@@ -6,6 +6,8 @@ TagManager:
   tags:
   - obstacle
   - finishingline
+  - jump
+  - allu
   layers:
   - Default
   - TransparentFX

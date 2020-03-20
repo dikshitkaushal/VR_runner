@@ -13,7 +13,8 @@ public class player_movement : MonoBehaviour
     public bool reachedfinishedline = false;
     private float timer = 0f;
     player_oscillation oscillate;
-
+    public Camera fpcam;
+    public float jumping_angle = 20.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +31,7 @@ public class player_movement : MonoBehaviour
         }
         timer -= Time.deltaTime;
         transform.position += speed * Vector3.forward * Time.deltaTime;
-        if(Input.GetKeyDown(KeyCode.Space) && isjumping==false)
+        if(fpcam.transform.localEulerAngles.x >jumping_angle && isjumping==false && fpcam.transform.localEulerAngles.x < 90.0f)
         {
             jump();
         }
