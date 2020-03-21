@@ -11,7 +11,7 @@ public class gamecontroller : MonoBehaviour
     AudioSource crowdvoice;
     public TextMesh infotext;
     private float gametimer = 0f;
-    private float restarttimer = 3f;
+    public GameObject rockets;
     private void Awake()
     {
         player.enabled = false;
@@ -54,22 +54,27 @@ public class gamecontroller : MonoBehaviour
         if (!player.reachedfinishedline)
         {
             gametimer += Time.deltaTime;
-            infotext.text = "Avoid the Obstacles!\nClick the Button to jump! \nYour Time : " + Mathf.Floor(gametimer);
+            infotext.text = "Avoid the Obstacles!\nMove the Head Down to jump! \nYour Time : " + Mathf.Floor(gametimer);
         }
         else
-        { 
-            restarttimer -= Time.deltaTime;
-            infotext.text = "You Win!\nYour Time : " + Mathf.Floor(gametimer)+"\nrestarting game " + Mathf.Floor(restarttimer);
-            
-            if(restarttimer<1)
-            {
-                restartgame();
-            }
+        {
+            playaudio(3);
+            infotext.text = "You Win!\nYour Time : " + Mathf.Floor(gametimer);
+            playaudio(4);
+            rockets.SetActive(true);
+            StartCoroutine(stopgame());
         }
+    }
+    IEnumerator stopgame()
+    {
+        yield return new WaitForSeconds(1);
+        player.enabled = false;
     }
 
     public void restartgame()
     {
+        rockets.SetActive(false);
+        player.enabled = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
