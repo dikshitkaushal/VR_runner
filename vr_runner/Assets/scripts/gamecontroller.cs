@@ -13,7 +13,6 @@ public class gamecontroller : MonoBehaviour
     public TextMesh infotext;
     private float gametimer = 0f;
     public GameObject rematch;
-    public GameObject rockets;
     private void Awake()
     {
         player.enabled = false;
@@ -72,7 +71,6 @@ public class gamecontroller : MonoBehaviour
             }
             infotext.text = "You Win!\nYour Time : " + Mathf.Floor(gametimer);
             rematch.SetActive(true);
-            rockets.SetActive(true);
             StartCoroutine(stopgame());
         }
     }
@@ -85,7 +83,6 @@ public class gamecontroller : MonoBehaviour
 
     public void restartgame()
     {
-        rockets.SetActive(false);
         player.enabled = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
