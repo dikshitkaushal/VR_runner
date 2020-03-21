@@ -8,9 +8,11 @@ public class gamecontroller : MonoBehaviour
     public player_movement player;
     public AudioClip[] clips;
     private AudioSource source;
+    public Camera fpcam;
     AudioSource crowdvoice;
     public TextMesh infotext;
     private float gametimer = 0f;
+    public GameObject rematch;
     public GameObject rockets;
     private void Awake()
     {
@@ -22,6 +24,7 @@ public class gamecontroller : MonoBehaviour
         crowdvoice = GameObject.Find("Player").GetComponent<AudioSource>();
         source = GetComponent<AudioSource>();
         start_the_race();
+        rematch.SetActive(false);
     }
 
     public void start_the_race()
@@ -58,9 +61,17 @@ public class gamecontroller : MonoBehaviour
         }
         else
         {
-            playaudio(3);
+            
+            RaycastHit hit;
+            if (Physics.Raycast(fpcam.transform.position, fpcam.transform.forward, out hit))
+            {
+                if (hit.transform.CompareTag("restart"))
+                {
+                    restartgame();
+                }
+            }
             infotext.text = "You Win!\nYour Time : " + Mathf.Floor(gametimer);
-            playaudio(4);
+            rematch.SetActive(true);
             rockets.SetActive(true);
             StartCoroutine(stopgame());
         }
@@ -68,6 +79,7 @@ public class gamecontroller : MonoBehaviour
     IEnumerator stopgame()
     {
         yield return new WaitForSeconds(1);
+        playaudio(3);
         player.enabled = false;
     }
 
