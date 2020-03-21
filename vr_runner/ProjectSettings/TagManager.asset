@@ -8,6 +8,7 @@ TagManager:
   - finishingline
   - jump
   - restart
+  - play
   layers:
   - Default
   - TransparentFX

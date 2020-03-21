@@ -15,9 +15,15 @@ public class player_movement : MonoBehaviour
     player_oscillation oscillate;
     public Camera fpcam;
     public float jumping_angle = 20.0f;
+    public Canvas damage;
+    private void Awake()
+    {
+        damage.enabled = false;
+    }
     // Start is called before the first frame update
     void Start()
     {
+
         oscillate = GetComponentInChildren<player_oscillation>();
     }
 
@@ -54,10 +60,18 @@ public class player_movement : MonoBehaviour
         if(other.CompareTag("obstacle"))
         {
             speed *= 0.3f;
+            StartCoroutine(showdamage());
         }
+       
         if(other.CompareTag("finishingline"))
         {
             reachedfinishedline = true;
         }
+    }
+    IEnumerator showdamage()
+    {
+        damage.enabled = true;
+        yield return new WaitForSeconds(1f);
+        damage.enabled = false;
     }
 }
